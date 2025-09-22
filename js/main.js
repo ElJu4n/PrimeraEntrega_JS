@@ -11,10 +11,20 @@ let costoTotal = 0
 
 let index = 0;
 
+function sumarElementos (array){
+    costoTotal = 0
+    for(let i = 0; i<index; i++){
+        costoTotal+=costoEvento[i]
+    }
+    console.log(costoTotal)
+
+    return costoTotal
+}
+
 alert("Bienvenido a el planeador de vacaciones. Con esta pequeña aplicacion podras planear un dia de tus vacaciones y presupuestarlo. Presiona Ok para comenzar")
 
-while (opcionMenu!=5){
-    opcionMenu = parseInt(prompt("Planea tu dia \n\nQue quieres hacer? \n\n1. Agregar Evento\n2. Quitar Evento\n3. Mostrar los eventos del dia\n4. Obten el presupuesto del dia\n5. Salir"))
+while (opcionMenu!=6){
+    opcionMenu = parseInt(prompt("Planea tu dia \n\nQue quieres hacer? \n\n1. Agregar Evento\n2. Quitar Evento\n3. Mostrar los eventos del dia\n4. Obten el presupuesto del dia\n5. Obten el total de horas diarias\n6. Salir"))
     switch (opcionMenu){
         case 1:
 
@@ -42,22 +52,17 @@ while (opcionMenu!=5){
             }
 
             //Establecer la hora
-            horaEvento.push(prompt("A que hora es? (Use el formato HH:MM)"))
+            horaEvento.push(prompt("Cuanto dura? (Horas)"))
 
             //Establecer el presupuesto
             costoEvento.push(parseInt(prompt("Cual es el presupuesto dedicado a este evento")))
 
             //Imprime todo el evento
             if(tipoEvento[index]=="Transporte"){
-                alert("Se agrego un " + tipoEvento[index]+ "\nCon el nombre " + nombreEvento[index] + "\nA las "+ horaEvento[index]+"\nCon el presupuesto de " +costoEvento[index]) 
+                alert("Se agrego un " + tipoEvento[index]+ "\nCon el nombre " + nombreEvento[index] + "\nDurando "+ horaEvento[index]+" horas"+"\nCon el presupuesto de " +costoEvento[index]) 
             } else {
-                alert("Se agrego una " + tipoEvento[index]+ "\nCon el nombre " + nombreEvento[index] + "\nA las "+ horaEvento[index]+"\nCon el presupuesto de " +costoEvento[index]) 
+                alert("Se agrego una " + tipoEvento[index]+ "\nCon el nombre " + nombreEvento[index] + "\nA las "+ horaEvento[index]+" horas"+"\nCon el presupuesto de " +costoEvento[index]) 
             }
-            
-
-            //Guardar en arreglo para mostrar o quitar
-
-            listaCompleta.push()
 
             //Se incremente el indice para el siguiente elemento
             index+=1
@@ -65,12 +70,16 @@ while (opcionMenu!=5){
             break
             
         case 2:
-            finalListString = ""
-            for(let i = 0; i<index; i++){
-                let numb = i+1
-                finalListString += numb +". [" + tipoEvento[i]+ "] Con el nombre " + nombreEvento[i] + " a las "+ horaEvento[i]+" con el presupuesto de " +costoEvento[i] + "\n"
+            const generaString = function (globalIndex) {
+                let dummyString = ""
+                for(let i = 0; i<globalIndex; i++){
+                    let numb = i+1
+                    dummyString += numb +". [" + tipoEvento[i]+ "] Con el nombre " + nombreEvento[i] + " con la duracion de "+ horaEvento[i]+"horas con el presupuesto de " +costoEvento[i] + "\n"
+                }
+                return dummyString
             }
-            opcionQuitar = parseInt(prompt("Quitar Evento\n\nIngresa identificador del evento que quieras quitar:\n"+finalListString))
+
+            opcionQuitar = parseInt(prompt("Quitar Evento\n\nIngresa identificador del evento que quieras quitar:\n"+generaString(index)))
 
             console.log(opcionQuitar)
 
@@ -81,7 +90,7 @@ while (opcionMenu!=5){
             let indexQuitar = opcionQuitar-1
             console.log(indexQuitar)
 
-            console.log("Se quito" + tipoEvento[indexQuitar]+ "] Con el nombre " + nombreEvento[indexQuitar] + " a las "+ horaEvento[indexQuitar]+" con el presupuesto de " +costoEvento[indexQuitar])
+            console.log("Se quito" + tipoEvento[indexQuitar]+ "] Con el nombre " + nombreEvento[indexQuitar] + " con duracion de "+ horaEvento[indexQuitar]+" horas con el presupuesto de " +costoEvento[indexQuitar])
 
             tipoEvento.splice(indexQuitar,1)
             console.log(tipoEvento)
@@ -97,32 +106,29 @@ while (opcionMenu!=5){
             //Crear el String para visualizar
 
             if (index!=0){
-                finalListString = ""
 
-                for(let i = 0; i<index; i++){
+            const generaString = function (globalIndex) {
+                let dummyString = ""
+                for(let i = 0; i<globalIndex; i++){
                     let numb = i+1
-                    finalListString += numb +". [" + tipoEvento[i]+ "] Con el nombre " + nombreEvento[i] + " a las "+ horaEvento[i]+" con el presupuesto de " +costoEvento[i] + "\n"
+                    dummyString += numb +". [" + tipoEvento[i]+ "] Con el nombre " + nombreEvento[i] + " con duracion de "+ horaEvento[i]+" horas con el presupuesto de " +costoEvento[i] + "\n"
                 }
+                return dummyString
+            }
 
-                alert("Visualizar Dia\n\n"+finalListString)                
+                alert("Visualizar Dia\n\n"+ generaString(index))                
             } else {
                 alert("No tienes eventos el dia de hoy")
             }
 
             break
         case 4:
-            const sumar = function(){
-                costoTotal = 0
-                for(let i = 0; i<index; i++){
-                    costoTotal+=costoEvento[i]
-                }
-                console.log(costoTotal)
+            alert("El presupuesto total es de: " + sumarElementos(costoEvento))
+            break
 
-                return costoTotal
-            }
-
-            alert("El presupuesto total es de: " + sumar())
-
+        case 5:
+            alert("El total de horas ocupadas es de: " + sumarElementos(horaEvento))
+            break
         default:
             break
     }
