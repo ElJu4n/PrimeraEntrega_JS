@@ -25,9 +25,20 @@ function generaString(globalIndex) {
     let dummyString = ""
     for(let i = 0; i<globalIndex; i++){
         let numb = i+1
-        dummyString += numb +". [" + tipoEvento[i]+ "] Con el nombre " + nombreEvento[i] + " con la duracion de "+ horaEvento[i]+"horas con el presupuesto de " +costoEvento[i] + "\n"
+        dummyString += numb +". [" + tipoEvento[i]+ "] Con el nombre " + nombreEvento[i] + " con la duracion de "+ horaEvento[i]+" horas con el presupuesto de " +costoEvento[i] + "\n"
     }
     return dummyString
+}
+
+function quitarEventoLog (indexQuitar){
+    tipoEvento.splice(indexQuitar,1)
+    console.log(tipoEvento)
+    nombreEvento.splice(indexQuitar,1)
+    console.log(nombreEvento)
+    horaEvento.splice(indexQuitar,1)
+    console.log(horaEvento)
+    costoEvento.splice(indexQuitar,1)
+    console.log(costoEvento)
 }
 
 alert("Bienvenido a el planeador de vacaciones. Con esta pequeña aplicacion podras planear un dia de tus vacaciones y presupuestarlo. Presiona Ok para comenzar")
@@ -90,12 +101,7 @@ while (opcionMenu!=6){
 
             console.log("Se quito" + tipoEvento[indexQuitar]+ "] Con el nombre " + nombreEvento[indexQuitar] + " con duracion de "+ horaEvento[indexQuitar]+" horas con el presupuesto de " +costoEvento[indexQuitar])
 
-            tipoEvento.splice(indexQuitar,1)
-            console.log(tipoEvento)
-            nombreEvento.splice(indexQuitar,1)
-            console.log(nombreEvento)
-            horaEvento.splice(indexQuitar,1)
-            costoEvento.splice(indexQuitar,1)
+            quitarEventoLog(indexQuitar)
 
             index-=1
 
