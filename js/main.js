@@ -12,13 +12,13 @@ let costoTotal = 0
 let index = 0;
 
 function sumarElementos (array){
-    costoTotal = 0
+    total = 0
     for(let i = 0; i<index; i++){
-        costoTotal+=costoEvento[i]
+        total+=array[i]
     }
-    console.log(costoTotal)
+    console.log(array)
 
-    return costoTotal
+    return total
 }
 
 function generaString(globalIndex) {
@@ -72,7 +72,7 @@ while (opcionMenu!=6){
             }
 
             //Establecer la hora
-            horaEvento.push(prompt("Cuanto dura? (Horas, Int)"))
+            horaEvento.push(parseInt(prompt("Cuanto dura? (Horas, Int)")))
 
             //Establecer el presupuesto
             costoEvento.push(parseInt(prompt("Cual es el presupuesto dedicado a este evento")))
